@@ -1,5 +1,13 @@
 <h1>Posts#edit</h1>
 <%= form_with model: @post do |f| %>
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
   <h4>image</h4>
   <%= f.file_field :image, accept: "image/*" %>
   <h4>body</h4>

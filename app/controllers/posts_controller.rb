@@ -6,8 +6,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to posts_path, notice: '投稿に成功しました'
+    else
+      render :new
+    end
   end
 
   def index
@@ -26,9 +29,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path(post.id)
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path(@post.id), notice: '投稿を更新しました'
+    else
+      render :edit
+    end
   end
 
   def destroy

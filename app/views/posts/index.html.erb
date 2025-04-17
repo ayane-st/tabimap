@@ -3,7 +3,7 @@
   <div>
     <p>ユーザー名：<%= post.user.name %></p>
     <%= link_to post_path(post.id) do %>
-      <%= image_tag post.image %>
+      <%= image_tag post.get_image(100,100) %>
     <% end %>
     <p><%= post.body %></p>
   </div>
