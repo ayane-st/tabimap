@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
   validates :introduction, length: { maximum: 100 }
   validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 20 } 
- 
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

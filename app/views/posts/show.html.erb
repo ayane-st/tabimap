@@ -1,5 +1,5 @@
 <h1>Posts#show</h1>
-  <p>ユーザー名：<%= @post.user.name %></p>
+  <p>ユーザー名：<%= @post.user&.name || "不明なユーザー" %></p>
   <%= image_tag @post.get_image(100,100) %>
   <p><%= @post.body %></p>
   <p><%= @post.rocation %></p>
@@ -8,4 +8,5 @@
     <%= link_to 'edit', edit_post_path(@post.id) %>
     <%= link_to 'delete', post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
+  <%= link_to "Posts", posts_path %>
 <p>Find me in app/views/posts/show.html.erb</p>
