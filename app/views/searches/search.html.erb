@@ -1,0 +1,11 @@
+<h1>Searches#search</h1>
+
+<% if @model == 'user' %>
+	<h3>Users search for "<%= @content %>"</h3>
+  <%= render 'users/index', users: @records %>
+<% elsif @model == 'post' %>
+	<h3>Posts search for "<%= @content %>"</h3>
+  <%= render 'posts/index', posts: @records %>
+<% end %> 
+
+<p>Find me in app/views/searches/search.html.erb</p>

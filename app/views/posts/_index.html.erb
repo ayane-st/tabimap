@@ -1,0 +1,16 @@
+<% posts.each do |post| %>
+  <div>
+    <p>
+      ユーザー名：
+      <% if post.user %>
+        <%= link_to post.user.name, user_path(post.user) %>
+      <% else %>
+        不明なユーザー
+      <% end %>
+    </p>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_image(100,100) %>
+    <% end %>
+    <p><%= post.body %></p>
+  </div>
+<% end %>
