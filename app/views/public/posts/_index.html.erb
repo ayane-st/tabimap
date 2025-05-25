@@ -1,0 +1,21 @@
+<div class="card-list-container py-5">
+  <% posts.each do |post| %>
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image(300, 300),
+            class: "card-img-top d-block mx-auto",
+            style: "max-width: 100%; height: auto;" %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title">
+          <% if post.user %>
+            <%= link_to post.user.name, user_path(post.user) %>
+          <% else %>
+            不明なユーザー
+          <% end %>
+        </h5>
+        <p class="card-text"><%= post.body %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,22 @@
+  <div class="d-flex align-items-center mb-3">
+    <%= image_tag user.get_profile_image(150,150), class:"me-3" %>
+
+    <% if user == current_user %>
+      <%= link_to edit_user_path(user.id), 
+          class: "btn btn-outline-secondary edit_user d-flex align-items-center ms-auto" do %>
+        <i class="fa-solid fa-gear me-2" style="font-size: 24px;"></i>
+        <div>プロフィール編集</div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <table class="table">
+    <tr>
+      <th>name</th>
+      <td class="text-break" style="max-width: 300px;"><%= user.name %></td>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <td class="text-break" style="max-width: 300px;"><%= user.introduction %></td>
+    </tr>
+  </table>

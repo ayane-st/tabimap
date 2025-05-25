@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div class="row">
+
+     <!-- 左側: ユーザー情報 -->
+    <div class="col-12 col-md-3">
+      <% if @post.user %>
+        <%= render 'public/users/user_info', user: @post.user %>
+      <% else %>
+        <img src="tabimap/app/assets/images/no_image.jpg" width="150" height="150">
+        不明なユーザー
+      <% end %>
+    </div>
+    
+    <!-- 左側: ユーザー情報 -->
+    <div class="col-12 col-md-9">
+      <div class="card">
+        <%= image_tag @post.get_image(300, 300),
+           class: "card-img-top d-block mx-auto",
+           style: "max-width: 100%; height: auto;" %>
+
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= @post.user&.name || "不明なユーザー" %>
+          </h5>
+          <p class="card-text"><%= @post.body %></p>
+          <p class="card-text"><%= @post.rocation %></p>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+              <% if @post.user == current_user %>
+                <%= link_to edit_post_path(@post.id), class: "card-link" do %>edit<%end%>
+                <%= link_to post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" ,
+                    class: "card-link" do %>
+                    delete
+                <% end %>
+              <% end %>
+            </div>
+            <span class="text-muted" style="text-align: right;"><%= @post.created_at.strftime('%Y/%m/%d')%></span>
+          </div>
+
+          <div class="card-header">
+            <%= form_with model: [@post, @post_comment], local: true, html: { class: "w-100" } do |f| %>
+              <%= f.text_area :comment, rows: '2', placeholder:"コメントをここに", class: "form-control mb-2" %>
+              <div class="d-flex justify-content-end">
+                <%= f.submit "送信", class: "btn btn-primary" %>
+              </div>
+            <% end %>  
+          </div>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= @post.post_comments.count %> comment</li>
+
+            <% @post.post_comments.each do |post_comment| %>
+              <li class="list-group-item">
+                <div class="d-flex">
+                  <!--user_image-->
+                  <div class="me-3 text-center" style="min-width: 70px;">
+                    <%= image_tag post_comment.user.get_profile_image(60,60),class: "rounded-circle" %>
+                    <div><small><%= post_comment.user.name %></small></div>
+                  </div>
+
+                  <div class="flex-grow-1 ms-10">
+                    <!--coment-body-->
+                    <p class="mb-1"><%= post_comment.comment %></p>
+
+                    <!--yyyymmdd & delete-->
+                    <div class="d-flex flex-column align-items-end ms-3">
+                      <small class="text-muted me-2">
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                      </small>
+                      <% if post_comment.user == current_user %>
+                        <%= link_to post_post_comment_path(post_comment.post, post_comment),
+                            method: :delete, class: "btn btn-sm btn-outline-danger" do %>
+                        削除
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
