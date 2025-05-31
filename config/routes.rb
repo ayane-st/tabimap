@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'favorites/create'
+  get 'favorites/destroy'
   devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: 'admin/sessions'
   }
