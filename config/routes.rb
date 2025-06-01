@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
-    resources :users
+    resources :users do
+      resources :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
     get 'homes/about'
     get '/search', to: 'searches#search'
   end
