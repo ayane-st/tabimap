@@ -1,7 +1,7 @@
 <h1>Posts#new</h1>
 
 <% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
+  <p><%= @post.errors.count %>件のエラーが発生しました</p>
   <ul>
     <% @post.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -12,10 +12,8 @@
 <%= form_with model: @post do |f| %>
   <h4>image</h4>
   <%= f.file_field :image, accept: "image/*" %>
+
   <h4>body</h4>
   <%= f.text_area :body %>
-  <h4>rocation</h4>
-  <%= f.text_field :rocation %>
   <%= f.submit 'submit' %>
 <% end %>
-<p>Find me in app/views/posts/new.html.erb</p>

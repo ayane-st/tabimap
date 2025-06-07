@@ -23,7 +23,7 @@
             <%= @post.user&.name || "不明なユーザー" %>
           </h5>
           <p class="card-text"><%= @post.body %></p>
-          <p class="card-text"><%= @post.rocation %></p>
+          <span><i class="fa-solid fa-location-dot"></i> <%= @post.address %></span>
           <!-- いいね・編集/削除ボタン -->
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-3">
