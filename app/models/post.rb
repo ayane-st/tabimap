@@ -9,6 +9,8 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
   validates :user_id, presence: true
 
+  geocoded_by :address
+  after_validation :geocode, if: ->(obj) { obj.address.present? }
   
   def get_image(width, height)
     unless image.attached?
