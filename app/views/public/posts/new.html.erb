@@ -1,33 +1,19 @@
-<div class="container">
-  <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-      <h5 class="text-dark bg-light p-4 mb-0">新規投稿</h5>
-      <div class="form-body p-4">
-        <% if @post.errors.any? %>
-          <div class="alert alert-danger" role="alert">
-            <p><%= @post.errors.count %>件のエラーが発生しました</p>
-            <ul>
-              <% @post.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <%= form_with model: @post do |f| %>
-          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
-          <div class="input-group mb-3 mt-4">
-            <div class="form-group">
-              <%= f.label :caption %>
-              <%= f.text_field :body, class: "form-control post_body" %>
-            </div>
-            <div class="form-group">
-              <%= f.label :rocation %>
-              <%= f.text_field :rocation, class: "form-control post_rocation" %>
-            </div>
-          </div>
-          <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info mt-4" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>Posts#new</h1>
+
+<% if @post.errors.any? %>
+  <p><%= @post.errors.count %>件のエラーが発生しました</p>
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @post do |f| %>
+  <h4>image</h4>
+  <%= f.file_field :image, accept: "image/*" %>
+
+  <h4>body</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'submit' %>
+<% end %>

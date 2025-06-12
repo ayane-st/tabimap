@@ -8,15 +8,6 @@
             <%= image_tag post.get_image(300, 300), class: "card-img-top" %>
           <% end %>
           <div class="card-body">
-            <div class="row">
-              <div class="col-3">
-                <% if post.user.present? %>
-                  <%= image_tag post.user.get_profile_image(50, 50) %>
-                <% else %>
-                  <img src="tabimap/app/assets/images/no_image.jpg" width="50" height="50">
-                <% end %>
-              </div>
-              <div class="col-9">
             <p class="card-title">
               <% if post.user %>
                 <%= link_to post.user.name, user_path(post.user) %>
@@ -39,8 +30,6 @@
                 </span>
               </p><!-- card-title -->
             <% end %>
-              </div>
-            </div><!-- row -->
           </div><!-- card-body -->
         </div><!-- card -->
       </div><!-- col -->
