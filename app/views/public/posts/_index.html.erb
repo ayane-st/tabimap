@@ -1,15 +1,12 @@
-<div class="card-list-container">
+<div class="card-list-container py-5">
   <!-- カードを4枚並べにする  -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 mx-2">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
     <% posts.each do |post| %>
-      <div class="col mb-4">
+      <div class="col">
         <div class="card">
-          <div style="width: 100%; aspect-ratio: 1 / 1; display: flex; justify-content: center;
-                      align-items: center; background: #f8f9fa; overflow: hidden;">
-            <%= link_to post_path(post.id) do %>
-              <%= image_tag post.get_image(1000, 1000), class: "card-img-top" %>
-            <% end %>
-          </div>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image(300, 300), class: "card-img-top" %>
+          <% end %>
           <div class="card-body">
             <div class="row">
               <div class="col-3">
@@ -20,33 +17,33 @@
                 <% end %>
               </div>
               <div class="col-9">
-            <p class="card-title mx-2">
+            <p class="card-title">
               <% if post.user %>
                 <%= link_to post.user.name, user_path(post.user) %>
               <% else %>
                 不明なユーザー
               <% end %>
-            </p>
+            </p><!-- card-title -->
             <% if post.address.present? %>
-              <p class="card-title d-none d-lg-block mx-2">
+              <p class="card-title">
                 <span>
                   <i class="fa-solid fa-location-dot"></i>
                   <%= post.address %>
                 </span>
-              </p>
+              </p><!-- card-title -->
             <% elsif post.rocation.present? %>
-              <p class="card-title d-none d-lg-block mx-2">
+              <p class="card-title">
                 <span>
                   <i class="fa-solid fa-flag"></i>
                   <%= post.rocation %>
                 </span>
-              </p>
+              </p><!-- card-title -->
             <% end %>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div><!-- row -->
+          </div><!-- card-body -->
+        </div><!-- card -->
+      </div><!-- col -->
     <% end %>
-  </div>
+  </div><!-- row row-cols-1 row-cols-md-4 g-4 -->
 </div>
