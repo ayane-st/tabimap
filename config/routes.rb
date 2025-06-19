@@ -1,15 +1,25 @@
 Rails.application.routes.draw do
   
   devise_for :admin, skip: [:registrations, :password], controllers: {
-    sessions: 'admin/sessions'
+   sessions: 'admin/sessions'
   }
+
+  #devise_for :admins, path: "admin", controllers: {
+  #  sessions: 'admin/admins/sessions'
+  #}
+  
+  #$ rails g devise:controllers admin/admins
+  #$ rails g devise:views admin/admins
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:destroy]
   end
 
-  devise_for :users
+  devise_for :users, path: "/", controllers: {
+    registrations: 'public/users/registrations',
+    sessions: 'public/users/sessions'
+  }
 
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
