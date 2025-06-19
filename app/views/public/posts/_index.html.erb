@@ -1,21 +1,38 @@
 <div class="card-list-container py-5">
-  <% posts.each do |post| %>
-    <div class="card w-50 mx-auto mt-4 shadow-lg">
-      <%= link_to post_path(post.id) do %>
-        <%= image_tag post.get_image(300, 300),
-            class: "card-img-top d-block mx-auto",
-            style: "max-width: 100%; height: auto;" %>
-      <% end %>
-      <div class="card-body">
-        <h5 class="card-title">
-          <% if post.user %>
-            <%= link_to post.user.name, user_path(post.user) %>
-          <% else %>
-            不明なユーザー
+  <!-- カードを4枚並べにする  -->
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <% posts.each do |post| %>
+      <div class="col">
+        <div class="card">
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image(300, 300), class: "card-img-top" %>
           <% end %>
-        </h5>
-        <p class="card-text"><%= post.body %></p>
-      </div>
-    </div>
-  <% end %>
+          <div class="card-body">
+            <p class="card-title">
+              <% if post.user %>
+                <%= link_to post.user.name, user_path(post.user) %>
+              <% else %>
+                不明なユーザー
+              <% end %>
+            </p><!-- card-title -->
+            <% if post.address.present? %>
+              <p class="card-title">
+                <span>
+                  <i class="fa-solid fa-location-dot"></i>
+                  <%= post.address %>
+                </span>
+              </p><!-- card-title -->
+            <% elsif post.rocation.present? %>
+              <p class="card-title">
+                <span>
+                  <i class="fa-solid fa-flag"></i>
+                  <%= post.rocation %>
+                </span>
+              </p><!-- card-title -->
+            <% end %>
+          </div><!-- card-body -->
+        </div><!-- card -->
+      </div><!-- col -->
+    <% end %>
+  </div><!-- row row-cols-1 row-cols-md-4 g-4 -->
 </div>

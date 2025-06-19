@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :admin, skip: [:registrations, :password], controllers: {
    sessions: 'admin/sessions'
   }
@@ -28,8 +28,13 @@ Rails.application.routes.draw do
     root to: "homes#top"
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
-    resources :users
+    resources :users do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
     get 'homes/about'
     get '/search', to: 'searches#search'
   end
