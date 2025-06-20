@@ -14,25 +14,25 @@
               <% else %>
                 不明なユーザー
               <% end %>
-            </p><!-- card-title -->
+            </p>
             <% if post.address.present? %>
               <p class="card-title">
                 <span>
                   <i class="fa-solid fa-location-dot"></i>
                   <%= post.address %>
                 </span>
-              </p><!-- card-title -->
+              </p>
             <% elsif post.rocation.present? %>
               <p class="card-title">
                 <span>
                   <i class="fa-solid fa-flag"></i>
                   <%= post.rocation %>
                 </span>
-              </p><!-- card-title -->
+              </p>
             <% end %>
-          </div><!-- card-body -->
-        </div><!-- card -->
-      </div><!-- col -->
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div><!-- row row-cols-1 row-cols-md-4 g-4 -->
+  </div>
 </div>
