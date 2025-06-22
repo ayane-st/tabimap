@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
 
      <!-- 左側: ユーザー情報 -->
@@ -62,19 +62,25 @@
           <!-- キャプション -->
           <p class="card-text px-1 pt-2" style="font-size: 1.3rem;"><%= @post.body %></p>
           <div class="d-flex justify-content-between  px-1">
-            <span style="font-size: 1.3rem;"><i class="fa-solid fa-location-dot"></i> <%= @post.rocation %></span>
+            <% if @post.rocation.present? %>
+              <span style="font-size: 1.3rem;"><i class="fa-solid fa-location-dot"></i> <%= @post.rocation %></span>
+            <% else %>
+              <span></span>
+            <% end %>
             <span class="text-muted small"><%= @post.created_at.strftime('%Y/%m/%d') %></span>
           </div>
           
           <!-- 編集・削除 -->
-          <div class="d-flex justify-content-end mt-2">
-            <%= link_to edit_post_path(@post.id), 
-                class: "btn btn-outline-secondary mr-2" do %>編集<% end %>
-            <%= link_to post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" ,
-                class: "btn btn-outline-danger " do %>
-              削除
-            <% end %>
-          </div>
+          <% if @post.user == current_user %>
+            <div class="d-flex justify-content-end mt-2">
+              <%= link_to edit_post_path(@post.id), 
+                  class: "btn btn-outline-secondary mr-2" do %>編集<% end %>
+              <%= link_to post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" ,
+                  class: "btn btn-outline-danger " do %>
+                削除
+              <% end %>
+            </div>
+          <% end %>
         </div>
 
         <!-- コメント -->
@@ -84,6 +90,7 @@
             <%= form_with model: [@post, @post_comment] do |f| %>
               <div class="d-flex justify-content-between align-items-center">
                 <%= f.text_area :comment, rows: '2', placeholder:"コメントを入力", class: "form-control flex-grow-1 me-2" %>
+                <!-- ボタン -->
                 <span class="d-flex justify-content-end ml-2">
                   <button class="btn btn-outline-secondary" type="submit">
                     <i class="fa-solid fa-paper-plane px-3" style="font-size: 1.3rem;"></i>

@@ -1,19 +1,12 @@
-<h1>Posts#edit</h1>
-<%= form_with model: @post do |f| %>
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-  <h4>image</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>body</h4>
-  <%= f.text_area :body %>
-  <h4>rocation</h4>
-  <%= f.text_field :rocation %>
-  <%= f.submit 'submit' %>
-<% end %>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div class = "container">
+  <div class = "row no-gutters">
+    <div class = "col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-2">
+      <h5 class = "text-dark p-4 mb-0" style="background-color: #e9ecef;">投稿の修正</h5>
+      <div class = "form-body p-4">
+        <!-- 投稿フォームの共通書式 -->
+        <%= render 'form', post: @post %>
+
+      </div>
+    </div>
+  </div>
+</div>

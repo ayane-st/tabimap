@@ -1,11 +1,29 @@
-<h1>Searches#search</h1>
+<div class="container">
+  <!-- ユーザー索結果 -->
+  <% if @model == 'user' %>
+    <!-- 件数の表示 -->
+    <div class="d-flex align-items-end">
+      <h3>"<%= @content %>"の検索結果（ユーザー）</h3>
+      <span class="pb-2"><%= @records.count %>件</span>
+    </div>
 
-<% if @model == 'user' %>
-	<h3>Users search for "<%= @content %>"</h3>
-  <%= render 'public/users/index', users: @records %>
-<% elsif @model == 'post' %>
-	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render 'public/posts/index', posts: @records %>
-<% end %> 
 
-<p>Find me in app/views/searches/search.html.erb</p>
+    <%= render 'public/users/index', users: @records %>
+
+  <!-- 投稿検索結果 -->
+  <% elsif @model == 'post' %>
+    <!-- 件数の表示 -->
+    <div class="d-flex align-items-end">
+      <h3>"<%= @content %>"の検索結果（投稿）</h3>
+      <span class="pb-2"><%= @records.count %>件</span>
+    </div>
+
+    <!-- 検索結果の表示 -->
+    <div class="card-list-container pt-1 pb-5">
+      <!-- カードを4枚並べにする  -->
+      <div class="row row-cols-1 row-cols-md-4 g-4">
+        <%= render 'public/posts/index', posts: @records %>
+      </div>
+    </div>
+  <% end %> 
+</div>

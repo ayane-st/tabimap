@@ -1,38 +1,37 @@
-<div class="card-list-container py-5">
-  <!-- カードを4枚並べにする  -->
-  <div class="row row-cols-1 row-cols-md-4 g-4">
-    <% posts.each do |post| %>
-      <div class="col">
-        <div class="card">
-          <%= link_to post_path(post.id) do %>
-            <%= image_tag post.get_image(300, 300), class: "card-img-top" %>
-          <% end %>
-          <div class="card-body">
-            <p class="card-title">
-              <% if post.user %>
-                <%= link_to post.user.name, user_path(post.user) %>
-              <% else %>
-                不明なユーザー
-              <% end %>
-            </p>
-            <% if post.address.present? %>
-              <p class="card-title">
-                <span>
-                  <i class="fa-solid fa-location-dot"></i>
-                  <%= post.address %>
-                </span>
-              </p>
-            <% elsif post.rocation.present? %>
-              <p class="card-title">
-                <span>
-                  <i class="fa-solid fa-flag"></i>
-                  <%= post.rocation %>
-                </span>
-              </p>
-            <% end %>
-          </div>
+<% posts.each do |post| %>
+  <!-- カードの詳細 -->
+  <div class="col mb-4">
+    <div class="card h-100">
+      <!-- 画像 -->
+      <%= link_to post_path(post.id) do %>
+        <div class="ratio-box " 
+            style="position: relative; width: 100%; padding-top: 86.7%; background-color: #f8f9fa;">
+          <%= image_tag post.get_image(600, 520), 
+              class: "img-inside", 
+              style:"position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;" %>
         </div>
+      <% end %>
+
+      <!-- ユーザー名・ロケーション -->
+      <div class="card-body">
+        <!-- ユーザー名 -->
+        <h5 class="card-title">
+          <% if post.user %>
+            <%= link_to post.user.name, user_path(post.user), class: "text-dark" %>
+          <% else %>
+            不明なユーザー
+          <% end %>
+        </h5>
+        <!-- ロケーション -->
+        <% if post.rocation.present? %>
+          <p class="card-title">
+            <span>
+              <i class="fa-solid fa-map-pin mr-2"></i>
+              <%= post.rocation %>
+            </span>
+          </p>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

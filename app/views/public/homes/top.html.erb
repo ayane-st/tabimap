@@ -1,1 +1,14 @@
-<h1>旅行先で撮った写真と感想を、地図・地名と紐付けて投稿するSNS</h1>
+<div class="container">
+  <h1 class="d-flex justify-content-center mt-4 mb-5" style="text-weight: lighter;">
+      旅の写真を感想・場所と合わせて投稿するSNS
+  </h1>
+  <div class="d-flex justify-content-center mt-5">
+    <%= link_to new_user_registration_path, 
+        class: "btn btn-success btn-lg w-75" do %>新規登録<% end %>
+  </div>
+  <div class="d-flex justify-content-center mt-3 mb-3">
+    <%= link_to new_user_session_path, 
+        class: "btn btn-primary btn-lg w-75" do %>既存のアカウントでログイン<% end %>
+  </div>
+</div>
+      

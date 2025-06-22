@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
-    get 'homes/about'
+    get '/about', to: 'homes#about'
     get '/search', to: 'searches#search'
   end
 

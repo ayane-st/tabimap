@@ -1,34 +1,55 @@
-<h2>Sign up</h2>
+<div class = "container">
+  <div class = "row no-gutters">
+    <div class = "col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-2">
+      <h5 class = "text-dark p-4 mb-0" style="background-color: #e9ecef;">新規アカウント作成</h5>
+      <div class = "form-body p-4">
+        <%= form_with model: @user, url: user_registration_path do |f| %>
 
-  <%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <!-- エラーメッセージ -->
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+          <!-- 名前 -->
+          <div class="input-group my-2 d-flex">
+            <div class="field w-100">
+              <label>名前</label><br />
+              <%= f.text_field :name, autofocus: true, class:"w-100" %>
+            </div>
+          </div>
+
+          <!-- メールアドレス -->
+          <div class="input-group mb-2 mt-4 d-flex">
+            <div class="field w-100">
+              <label>メールアドレス</label><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"w-100" %>
+            </div>
+          </div>
+  
+          <!-- パスワード -->         
+          <div class="input-group mb-2 mt-4 d-flex">
+            <div class="field w-100">
+              <label>
+                パスワード
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length%>文字以上 )</em>
+                <% end %>
+              </label><br/>
+              <%= f.password_field :password, autocomplete: "new-password", class:"w-100" %>
+            </div>
+          </div>
+ 
+          <!-- 確認用パスワード -->
+          <div class="input-group mb-5 mt-4 d-flex">
+            <div class="field w-100">
+              <label>パスワード（確認用）</label><br/>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"w-100" %>
+            </div>
+          </div>
+
+          <%= f.submit '作成', class: "btn btn-lg btn-block btn-info mt-5" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+</div>
 
 <%= render "public/users/shared/links" %>
