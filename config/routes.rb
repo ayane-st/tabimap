@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   end
 
   get '/favicon.ico', to: -> (_) { [204, { 'Content-Type' => 'image/x-icon' }, ['']] }
+  get '/.well-known/security.txt', to: -> (_) { [200, { 'Content-Type' => 'text/plain' }, ['YOUR SECURITY INFORMATION HERE']] }
 
 end
