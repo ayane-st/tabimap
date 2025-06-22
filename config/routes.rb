@@ -39,4 +39,6 @@ Rails.application.routes.draw do
     get '/search', to: 'searches#search'
   end
 
+  get '/favicon.ico', to: -> (_) { [204, { 'Content-Type' => 'image/x-icon' }, ['']] }
+
 end
