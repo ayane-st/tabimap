@@ -54,7 +54,7 @@ class Public::PostsController < ApplicationController
   def is_matching_login_user
     post = Post.find(params[:id])
     unless post.user.id == current_user.id
-      redirect_to user_path(current_user.id)
+      redirect_to posts_path
     end
   end
 
