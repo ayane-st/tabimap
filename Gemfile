@@ -60,6 +60,7 @@ gem 'devise'
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
+  gem 'listen', '~> 3.3'
 end
 
 gem "net-smtp"
