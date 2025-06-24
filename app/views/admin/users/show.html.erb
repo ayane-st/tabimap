@@ -1,0 +1,19 @@
+<h1>User show</h1>
+<div>
+  名前<br/>
+  <%= @user.name %>
+
+  自己紹介<br/>
+  <%= @user.introduction %>
+
+  メールアドレス<br/>
+  <%= @user.email %>
+
+  投稿
+  <%= render 'public/posts/index', posts: @user.posts %>
+
+
+
+  <%= link_to '削除', admin_user_path(@user), method: :delete, data: { confirm:'本当に削除しますか？'} %>
+  <%= link_to '一覧', admin_dashboards_path %>
+</div>
