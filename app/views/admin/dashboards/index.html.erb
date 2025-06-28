@@ -1,11 +1,31 @@
-<h1>User Index</h1>
-<ul>
+<div class="container mt-5">
   <% @users.each do |user| %>
-    <li>
-      <%= link_to admin_user_path(user) do %>
-      <%= user.name %>-<%= user.email %>
-      <% end %>
-      <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm:'本当に削除しますか？'} %>
-    </li>
+    <div class="row">
+      <!--  画像 -->
+      <div class="col-3 col-md-2">
+        <%= image_tag user.get_profile_image(300,300) %>
+      </div>
+      <!--  名前と自己紹介 -->
+      <div class="col-7 col-md-8 d-flex align-items-center">
+        <div class="d-flex flex-column flex-md-row w-100">
+          <!-- 名前 -->
+          <div class="col-5">
+            <span class="text-dark"><%= user.name %></span>
+          </div>
+          <!-- 自己紹介 -->
+          <div class="col-7 ">
+            <%= user.introduction.presence || "" %>
+          </div>
+        </div>
+      </div>
+
+      <!--  詳細ボタン -->
+      <div class="col-2 col-md-2 d-flex align-items-center">
+          <%= link_to admin_dashboard_path(user.id),
+           class: "btn btn-secondary btn-sm w-100" do %>
+            <div>詳細</div>
+          <% end %>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

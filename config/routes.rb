@@ -13,7 +13,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:destroy, :show ]
+    resources :dashboards, only: [:show]
+    resources :users, only: [:destroy ]
   end
 
   devise_for :users, path: "/", controllers: {
